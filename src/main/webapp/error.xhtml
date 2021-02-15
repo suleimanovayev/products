@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:body>
+
+    <h2>Error page</h2>
+
+    <h4>Error message</h4>
+    #{requestScope['exceptionMessage']}
+
+    <h4>Stack trace</h4>
+    <ul>
+        <ui:repeat value="#{requestScope['error-stack']}" var="stack">
+            <li>#{stack.className} - #{stack.methodName} - #{stack.fileName} (#{stack.lineNumber})</li>
+        </ui:repeat>
+    </ul>
+
+</h:body>
+</html>

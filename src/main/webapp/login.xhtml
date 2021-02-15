@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+<div class="card">
+    <h:form>
+        <p:messages id="msgs"/>
+
+        <h:panelGrid columns="3" cellpadding="7" styleClass="p-mb-3">
+            <p:outputLabel for="email" value="Email:"/>
+            <p:inputText id="email" value="#{loginController.email}" required="true" label="Email">
+                <f:validator validatorId="emailValidator"  minimum="8"/>
+            </p:inputText>
+            <p:message for="email" display="icon"/>
+
+            <p:outputLabel for="password" value="Password:"/>
+            <p:inputText id="password" value="#{loginController.password}" label="Password" required="true">
+                <f:validateLength minimum="8"/>
+                <p:ajax update="msgPassword" event="keyup"/>
+            </p:inputText>
+            <p:message for="password" id="msgPassword" display="icon"/>
+
+        </h:panelGrid>
+        <p:commandButton value="Submit" update="@form" action="#{loginController.login}" icon="pi pi-check"/>
+    </h:form>
+</div>
+
+</html>
