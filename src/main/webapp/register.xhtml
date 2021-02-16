@@ -25,23 +25,12 @@
             </p:inputText>
             <p:message for="email" display="icon"/>
 
-            <p:outputLabel for="password" value="Password:"/>
-            <p:inputText id="password" value="#{registrationController.userDto.password}" label="Password" required="true">
-                <f:validateLength minimum="8"/>
-                <p:ajax update="msgPassword" event="keyup"/>
-            </p:inputText>
-            <p:message for="password" id="msgPassword" display="icon"/>
+            <h:outputLabel for="password" value="Password: *" />
+            <p:password id="password" value="#{registrationController.userDto.password}" feedback="false" match="passwordConfirm" label="Password" required="true"/>
 
-            <p:outputLabel for="passwordConfirm" value="Password Confirm:"/>
-            <p:inputText id="passwordConfirm"
-                         value="#{registrationController.userDto.passwordConfirm}"
-                         label="PasswordConfirm"
-                         required="true"
-                         validator="#{registrationController.isValidPasswordConfirm}">
-                <f:validateLength minimum="8"/>
-                <p:ajax update="msgPasswordConfirm" event="keyup"/>
-            </p:inputText>
-            <p:message for="passwordConfirm" id="msgPasswordConfirm" display="icon"/>
+
+            <h:outputLabel for="passwordConfirm" value="Password Confirm: *" />
+            <p:password id="passwordConfirm" value="#{registrationController.userDto.passwordConfirm}" feedback="false" label="Password Confirm" required="true"/>
         </h:panelGrid>
         <p:commandButton value="Submit" update="@form" action="#{registrationController.save}" icon="pi pi-check"/>
     </h:form>

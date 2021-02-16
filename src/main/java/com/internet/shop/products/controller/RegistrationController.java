@@ -14,10 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import java.io.Serializable;
 
 import static java.util.Collections.singleton;
@@ -31,6 +27,7 @@ import static java.util.Collections.singleton;
 public class RegistrationController implements Serializable {
     private final UserService userService;
     private final UserMapper userMapper;
+
     private UserDto userDto;
 
     @PostConstruct
@@ -48,13 +45,5 @@ public class RegistrationController implements Serializable {
         }
         log.error("User with email: {}, already exist", userDto.getEmail());
         throw new EmailExistException(String.format("Email %s is already taken", userDto.getEmail()));
-    }
-
-    public void isValidPasswordConfirm(FacesContext context, UIComponent component, Object password)  {
-        if (!password.equals(userDto.getPasswordConfirm())) {
-            FacesMessage message = new FacesMessage("Password confirm is not equal to password");
-            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-            throw new ValidatorException(message);
-        }
     }
 }
