@@ -22,10 +22,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login.jsf").permitAll()
                 .antMatchers("/register.jsf").permitAll()
-                .antMatchers("/products.jsf").permitAll()
-                .antMatchers("/index.jsf").permitAll()
-                .antMatchers("/basic.jsf").permitAll()
-                .antMatchers("/logout.xhtml").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -45,5 +41,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(customAuthenticationProvider);
     }
-
 }

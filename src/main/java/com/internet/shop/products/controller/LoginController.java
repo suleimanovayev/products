@@ -31,5 +31,4 @@ public class LoginController implements Serializable {
 
         return "/products.jsf";
     }
-
 }

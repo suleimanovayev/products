@@ -15,8 +15,7 @@
                 <h:outputText value="#{node.name}"/>
             </p:treeNode>
         </p:tree>
-        <h:commandLink action="#{logoutController.logout()}" value="Logout"></h:commandLink>
-
+        <h:commandLink update="@form" action="#{logoutController.logout}" value="Logout" icon="pi pi-check"></h:commandLink>
     </h:form>
 </h:body>
 </html>
