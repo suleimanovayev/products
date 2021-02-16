@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -27,6 +28,7 @@ import static java.util.Collections.singleton;
 public class RegistrationController implements Serializable {
     private final UserService userService;
     private final UserMapper userMapper;
+    private final PasswordEncoder encoder;
 
     private UserDto userDto;
 
@@ -38,10 +40,11 @@ public class RegistrationController implements Serializable {
     public String save() throws EmailExistException {
         if (!userService.isEmailAlreadyExist(userDto.getEmail())) {
             User user = userMapper.map(userDto);
+            user.setPassword(encoder.encode(userDto.getPassword()));
             user.setRoles(singleton(new Role("USER")));
             userService.save(user);
             log.info("Successful saved user with email: {}", userDto.getEmail());
-            return "/products.jsf";
+            return "/login.jsf";
         }
         log.error("User with email: {}, already exist", userDto.getEmail());
         throw new EmailExistException(String.format("Email %s is already taken", userDto.getEmail()));

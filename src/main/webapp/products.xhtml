@@ -4,7 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-<h:head></h:head>
 
 <h:body style="margin:75px;">
     <h2>Products list</h2>
@@ -15,7 +14,7 @@
                 <h:outputText value="#{node.name}"/>
             </p:treeNode>
         </p:tree>
-        <h:commandLink update="@form" action="#{logoutController.logout}" value="Logout" icon="pi pi-check"></h:commandLink>
+        <p:commandButton value="Submit" update="@form" action="#{logoutController.logout}" icon="pi pi-check"/>
     </h:form>
 </h:body>
 </html>

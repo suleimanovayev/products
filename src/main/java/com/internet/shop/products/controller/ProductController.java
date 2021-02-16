@@ -14,8 +14,8 @@ import java.io.Serializable;
 @Component
 @ViewScoped
 @RequiredArgsConstructor
-@Getter
-@Setter
+//@Getter
+//@Setter
 public class ProductController implements Serializable {
     private TreeNode root;
     private TreeNode selectedProduct;
@@ -24,5 +24,25 @@ public class ProductController implements Serializable {
     @PostConstruct
     public void init() {
         root = productService.findRoot();
+    }
+
+    public TreeNode getRoot() {
+        return root;
+    }
+
+    public void setRoot(TreeNode root) {
+        this.root = root;
+    }
+
+    public TreeNode getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    public void setSelectedProduct(TreeNode selectedProduct) {
+        this.selectedProduct = selectedProduct;
+    }
+
+    public ProductService getProductService() {
+        return productService;
     }
 }
