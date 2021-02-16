@@ -25,10 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .exceptionHandling()
-                .and()
-                .logout().logoutSuccessUrl("/login.jsf");
-
+                .exceptionHandling();
     }
 
     @Override
