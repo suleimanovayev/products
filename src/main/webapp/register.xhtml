@@ -6,7 +6,7 @@
 
 <div class="card">
     <h:form>
-    <p:messages id="msgs"/>
+        <p:messages id="msgs"/>
         <h:panelGrid columns="1" cellpadding="2" styleClass="p-mb-3">
             <p:outputLabel for="firstName" value="First name:"/>
             <p:inputText id="firstName" value="#{registrationController.userDto.firstName}" required="true" label="FirstName">
@@ -33,12 +33,13 @@
             <p:message for="password" id="msgPassword" display="icon"/>
 
             <p:outputLabel for="passwordConfirm" value="Password Confirm:"/>
-            <p:inputText id="passwordConfirmpassword"
+            <p:inputText id="passwordConfirm"
                          value="#{registrationController.userDto.passwordConfirm}"
                          label="PasswordConfirm"
                          required="true"
-            validator="#{registrationController.validate}">
+                         validator="#{registrationController.isValidPasswordConfirm}">
                 <f:validateLength minimum="8"/>
+                <p:ajax update="msgPasswordConfirm" event="keyup"/>
             </p:inputText>
             <p:message for="passwordConfirm" id="msgPasswordConfirm" display="icon"/>
         </h:panelGrid>
