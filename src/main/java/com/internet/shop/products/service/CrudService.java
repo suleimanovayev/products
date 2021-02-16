@@ -12,8 +12,4 @@ public interface CrudService<T extends BaseEntity> {
     T update(T entity);
 
     void deleteById(Long entityId);
-
-//    Optional<User> findByEmail(String userEmail);
-
-//    boolean isEmailAlreadyExist(String email);
 }

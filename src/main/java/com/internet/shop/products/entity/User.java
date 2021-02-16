@@ -33,6 +33,6 @@ public class User extends BaseEntity {
     @Column(name = "PASSWORD")
     private String password;
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private Set<Role> roles;
 }
