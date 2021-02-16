@@ -17,6 +17,9 @@
     <properties>
         <java.version>11</java.version>
         <mapstruct.version>1.4.1.Final</mapstruct.version>
+        <lombok.version>1.18.18</lombok.version>
+        <primefaces.version>6.1</primefaces.version>
+        <javax.faces.version>2.3.7</javax.faces.version>
     </properties>
 
     <dependencies>
@@ -49,17 +52,17 @@
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.faces</artifactId>
-            <version>2.3.7</version>
+            <version>${javax.faces.version}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>6.1</version>
+            <version>${primefaces.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.18</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
