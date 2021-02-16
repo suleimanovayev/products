@@ -1,24 +1,34 @@
 package com.internet.shop.products.controller;
 
 import com.internet.shop.products.dto.UserDto;
+import com.internet.shop.products.entity.Role;
+import com.internet.shop.products.entity.User;
 import com.internet.shop.products.exception.EmailExistException;
 import com.internet.shop.products.mapper.UserMapper;
 import com.internet.shop.products.service.UserService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Scope;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import java.io.Serializable;
+import java.util.Collections;
 
-@Component("registrationController")
-@Scope(value = "session")
+@Component
+@RequestScope
 @RequiredArgsConstructor
+@Getter
+@Setter
 public class RegistrationController implements Serializable {
     private final UserService userService;
     private UserMapper userMapper;
     private UserDto userDto;
-    private String passwordConfirm;
 
     @PostConstruct
     public void init() {
@@ -26,38 +36,20 @@ public class RegistrationController implements Serializable {
     }
 
     public String save() throws EmailExistException {
-        if(!userService.isEmailAlreadyExist(userDto.getEmail())) {
-            userService.save(userMapper.map(userDto));
+        if (!userService.isEmailAlreadyExist(userDto.getEmail())) {
+            User user = userMapper.map(userDto);
+            user.setRoles(Collections.singleton(new Role("USER")));
+            userService.save(user);
             return "/products.jsf";
         }
         throw new EmailExistException("Email is already taken, please choose another");
     }
 
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public UserMapper getUserMapper() {
-        return userMapper;
-    }
-
-    public void setUserMapper(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
-
-    public UserDto getUserDto() {
-        return userDto;
-    }
-
-    public void setUserDto(UserDto userDto) {
-        this.userDto = userDto;
-    }
-
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
+    public void validate(FacesContext facesContext, UIComponent uiComponent, Object password) throws ValidatorException {
+        if (!password.equals(userDto.getPasswordConfirm())) {
+            FacesMessage message = new FacesMessage("Password confirm is not equal to password");
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(message);
+        }
     }
 }

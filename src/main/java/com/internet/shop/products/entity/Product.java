@@ -22,10 +22,6 @@ public class Product extends BaseEntity implements Comparable<Product> {
     @Column(name = "PARENT_ID")
     private Long parentId;
 
-//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "productList")
-//    private List<Bucket> bucketList;
-//
-
     public Product(String name) {
         this.name = name;
     }

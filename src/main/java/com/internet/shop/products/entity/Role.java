@@ -2,9 +2,7 @@ package com.internet.shop.products.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.Objects;
 import java.util.Set;
 
 
@@ -21,6 +18,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "ROLES")
+@NoArgsConstructor
 public class Role extends BaseEntity {
 
     @Column(name = "ROLE_NAME")
@@ -30,4 +28,8 @@ public class Role extends BaseEntity {
     @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<User> users;
+
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
 }

@@ -31,6 +31,16 @@
                 <p:ajax update="msgPassword" event="keyup"/>
             </p:inputText>
             <p:message for="password" id="msgPassword" display="icon"/>
+
+            <p:outputLabel for="passwordConfirm" value="Password Confirm:"/>
+            <p:inputText id="passwordConfirmpassword"
+                         value="#{registrationController.userDto.passwordConfirm}"
+                         label="PasswordConfirm"
+                         required="true"
+            validator="#{registrationController.validate}">
+                <f:validateLength minimum="8"/>
+            </p:inputText>
+            <p:message for="passwordConfirm" id="msgPasswordConfirm" display="icon"/>
         </h:panelGrid>
         <p:commandButton value="Submit" update="@form" action="#{registrationController.save}" icon="pi pi-check"/>
     </h:form>

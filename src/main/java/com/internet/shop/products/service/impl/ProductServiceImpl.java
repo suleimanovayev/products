@@ -3,9 +3,9 @@ package com.internet.shop.products.service.impl;
 import com.internet.shop.products.entity.Product;
 import com.internet.shop.products.repository.ProductRepository;
 import com.internet.shop.products.service.ProductService;
+import com.internet.shop.products.tree.ProductData;
 import com.internet.shop.products.tree.Treenode;
 import com.internet.shop.products.tree.TypeAdapter;
-import org.primefaces.model.CheckboxTreeNode;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -80,78 +79,5 @@ public class ProductServiceImpl implements ProductService {
             createProducts(node, productData.getChildren());
         }
         return parent;
-    }
-
-
-    private List<Product> cj(List<Product> productList) {
-        return productList.stream().limit(10).collect(Collectors.toList());
-    }
-
-//    public DefaultTreeNode makeTree(ProductData root) {
-//        DefaultTreeNode rootNode = new DefaultTreeNode(root);
-//        for (ProductData top : root.getChildren()) {
-//            new DefaultTreeNode(extractNode(top), rootNode);
-////            root.children.add(extractNode(top, root, dates, typeAdapter));
-//        }
-//        return rootNode;
-//    }
-//
-//    protected  DefaultTreeNode extractNode(ProductData data) {
-//        DefaultTreeNode root = new DefaultTreeNode(data);
-//
-//        if (!data.getChildren().isEmpty()) {
-//            for (ProductData dat : data.getChildren()) {
-//                new DefaultTreeNode(root, extractNode(data));
-//                extractNode(dat);
-////                node.children.add(extractNode(dat, node, datas, typeAdapter));
-//            }
-//        }
-//        return root;
-//    }
-
-
-    public TreeNode createDocuments() {
-        TreeNode root = new DefaultTreeNode(new Product("Files"), null);
-
-        TreeNode applications = new DefaultTreeNode(new Product("Applications"), root);
-        TreeNode cloud = new DefaultTreeNode(new Product("Cloud"), root);
-        TreeNode desktop = new DefaultTreeNode(new Product("Desktop"), root);
-        TreeNode documents = new DefaultTreeNode(new Product("Documents"), desktop);
-        TreeNode downloads = new DefaultTreeNode(new Product("Downloads"), desktop);
-        TreeNode main = new DefaultTreeNode(new Product("Main"), documents);
-        TreeNode other = new DefaultTreeNode(new Product("Other"), documents);
-        TreeNode pictures = new DefaultTreeNode(new Product("Pictures"), root);
-        TreeNode videos = new DefaultTreeNode(new Product("Videos"), root);
-        TreeNode primeface = new DefaultTreeNode(new Product("Primefaces"), applications);
-        TreeNode primefacesapp = new DefaultTreeNode("app", new Product("primefaces.app"), primeface);
-        TreeNode nativeapp = new DefaultTreeNode("app", new Product("native.app"), primeface);
-        TreeNode mobileapp = new DefaultTreeNode("app", new Product("mobile.app"), primeface);
-        TreeNode editorapp = new DefaultTreeNode("app", new Product("editor.app"), applications);
-        TreeNode settingsapp = new DefaultTreeNode("app", new Product("settings.app"), applications);
-
-        return root;
-    }
-
-    public TreeNode createCheckboxDocuments() {
-        TreeNode root = new CheckboxTreeNode(new Product("Files"), null);
-
-        TreeNode applications = new CheckboxTreeNode(new Product("Applications"), root);
-        TreeNode cloud = new CheckboxTreeNode(new Product("Cloud"), root);
-        TreeNode desktop = new CheckboxTreeNode(new Product("Desktop"), root);
-        TreeNode documents = new CheckboxTreeNode(new Product("Documents"), root);
-        TreeNode downloads = new CheckboxTreeNode(new Product("Downloads"), root);
-        TreeNode main = new CheckboxTreeNode(new Product("Main"), root);
-        TreeNode other = new CheckboxTreeNode(new Product("Other"), root);
-        TreeNode pictures = new CheckboxTreeNode(new Product("Pictures"), root);
-        TreeNode videos = new CheckboxTreeNode(new Product("Videos"), root);
-
-        //Applications
-        TreeNode primeface = new CheckboxTreeNode(new Product("Primefaces"), applications);
-        TreeNode primefacesapp = new CheckboxTreeNode("app", new Product("primefaces.app"), primeface);
-        TreeNode nativeapp = new CheckboxTreeNode("app", new Product("native.app"), primeface);
-        TreeNode mobileapp = new CheckboxTreeNode("app", new Product("mobile.app"), primeface);
-        TreeNode editorapp = new CheckboxTreeNode("app", new Product("editor.app"), applications);
-        TreeNode settingsapp = new CheckboxTreeNode("app", new Product("settings.app"), applications);
-        return root;
     }
 }
