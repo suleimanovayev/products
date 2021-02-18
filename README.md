@@ -8,3 +8,5 @@ This project was bootstrapped with [Spring Boot App](https://docs.spring.io/spri
 2) Run project
 3) Test email - annakros@gmail.com
    Test password - adminadmin
+   Login page - http://localhost:8080/login.jsf
+   Register page - http://localhost:8080/register.jsf
